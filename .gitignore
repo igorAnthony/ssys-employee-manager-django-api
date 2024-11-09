@@ -1,2 +1,3 @@
 # ignora django files
+.env
 *.pyc
