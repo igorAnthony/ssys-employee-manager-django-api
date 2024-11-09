@@ -6,8 +6,11 @@ from employees.models import Employee
 from employees.serializers import EmployeeSerializer
 from .serializers import AgeReportResponseSerializer, SalaryReportResponseSerializer
 from datetime import datetime
+from rest_framework.permissions import IsAuthenticated
 
 class AgeReportView(APIView):
+    permission_classes = [IsAuthenticated]    
+
     def get(self, request):
         current_year = datetime.now().year
         employees = Employee.objects.all()
@@ -38,6 +41,8 @@ class AgeReportView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class SalaryReportView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def get(self, request):
         employees = Employee.objects.all()
 
